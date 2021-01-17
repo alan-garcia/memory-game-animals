@@ -27,7 +27,11 @@
   height: 120px;
 }
 
-.grid-animals-cell_hover {
+.grid-animals-cell img {
+  display: none;
+}
+
+.grid-animals-cell_hover:hover {
   background-color: #F9DC5C;
 }
 /*# sourceMappingURL=main.css.map */
