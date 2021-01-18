@@ -31,31 +31,33 @@ function deleteRepeatedAnimal(imageName) {
   return imagesCopy;
 }
 
-cells.forEach(cell => {
-  cell.addEventListener("click", (event) => {
-    let currentCell = event.currentTarget;
-    let thisAnimal = currentCell.children[0];
-    
-    thisAnimal.style.display = "table-cell";
-    imagesSelected.push(thisAnimal);
-    currentCell.classList.remove("grid-animals-cell_hover");
+cells.forEach(cell => cell.addEventListener("click", selectAnimal));
 
-    if (isCoupleSelected()) {
-      if (imagesSelected[0].src !== imagesSelected[1].src) {
-        setTimeout(() => {
-          hideFailSelectedCouple(imagesSelected);
-          imagesSelected = [];
-        }, 1200);
-      }
-      else {
+function selectAnimal(event) {
+  let currentCell = event.currentTarget;
+  let thisAnimal = currentCell.children[0];
+  
+  thisAnimal.style.display = "table-cell";
+  imagesSelected.push(thisAnimal);
+  currentCell.classList.remove("grid-animals-cell_hover");
+
+  if (isCoupleSelected()) {
+    if (imagesSelected[0].src !== imagesSelected[1].src) {
+      setTimeout(() => {
+        hideFailSelectedCouple(imagesSelected);
         imagesSelected = [];
-      }
+      }, 1200);
     }
+    else {
+      imagesSelected = [];
+    }
+  }
 
-    let cellsArray = Array.from(cells);
-    checkIfGameFinished(cellsArray);
-  });
-});
+  let cellsArray = Array.from(cells);
+  if (checkIfGameFinished(cellsArray)) {
+    removeAllEventClickListeners(cells);
+  }
+}
 
 function isCoupleSelected() {
   return imagesSelected.length === 2;
@@ -75,5 +77,13 @@ function checkIfGameFinished(cellsArray) {
     let newH2Element = document.createElement("h2");
     newH2Element.textContent = "¡Juego finalizado!";
     containerDiv.appendChild(newH2Element);
+    
+    return true;
+  }
+}
+
+function removeAllEventClickListeners(cells) {
+  for (let i = 0; i < cells.length; i++) {
+    cells[i].removeEventListener("click", selectAnimal);
   }
 }
