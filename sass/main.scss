@@ -4,14 +4,27 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100vh;
+}
+
 .container {
-  width: 960px;
-  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.grid-animals-wrap {
+  display: flex;
+  flex-flow: column wrap;
 }
 
 .grid-animals-container {
   display: table;
   border: 1px solid #333;
+  align-self: center;
+  margin-top: 3em;
 }
 
 .grid-animals-row {
@@ -24,8 +37,12 @@
   display: table-cell;
   width: 120px;
   height: 120px;
+
+  img {
+    display: none;
+  }
 }
 
-.grid-animals-cell_hover {
+.grid-animals-cell_hover:hover {
   background-color: #F9DC5C;
 }
