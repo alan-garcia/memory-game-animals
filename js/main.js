@@ -31,13 +31,13 @@ function deleteRepeatedAnimal(imageName) {
   return imagesCopy;
 }
 
-let lockBoard = false;
+// let lockBoard = false;
 cells.forEach(cell => cell.addEventListener("click", flipCard));
 
 function flipCard(event) {
-  if(lockBoard) {
-    return;
-  }
+  // if(lockBoard) {
+  //   return;
+  // }
   let currentCell = event.currentTarget;
   let thisAnimal = currentCell.children[0];
   
@@ -45,12 +45,12 @@ function flipCard(event) {
   imagesSelected.push(thisAnimal);
   currentCell.classList.remove("grid-animals-cell_hover");
   if (isCoupleSelected()) {
-    lockboard = true;
+    // lockboard = true;
     if (imagesSelected[0].src !== imagesSelected[1].src) {
       setTimeout(() => {
         hideFailSelectedCouple(imagesSelected);
         imagesSelected = [];
-        lockBoard = false;
+        // lockBoard = false;
       }, 1200);
     }
     else {
