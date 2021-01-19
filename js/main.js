@@ -33,7 +33,7 @@ function deleteRepeatedAnimal(imageName) {
 
 let lockBoard = false;
 cells.forEach(cell => cell.addEventListener("click", flipCard));
-Aplicar diseño centrado para el tablero del juego
+
 function flipCard(event) {
   if(lockBoard) {
     return;
