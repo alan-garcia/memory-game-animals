@@ -45,7 +45,7 @@ function flipCard(event) {
   imagesSelected.push(thisAnimal);
   currentCell.classList.remove("grid-animals-cell_hover");
   if (isCoupleSelected()) {
-    lockboard = true;
+    lockBoard = true;
     if (imagesSelected[0].src !== imagesSelected[1].src) {
       setTimeout(() => {
         hideFailSelectedCouple(imagesSelected);
@@ -55,6 +55,7 @@ function flipCard(event) {
     }
     else {
       imagesSelected = [];
+      lockBoard = false;
     }
   }
   
