@@ -22,20 +22,21 @@ body {
 }
 
 .grid-animals-container {
-  display: table;
   border: 1px solid #333;
   align-self: center;
   margin-top: 3em;
 }
 
+
+
 .grid-animals-row {
-  display: table-row;
+  display: flex;
 }
 
 .grid-animals-cell {
   border: 1px solid #333;
   cursor: pointer;
-  display: table-cell;
+  display: flex;
   width: 120px;
   height: 120px;
 
