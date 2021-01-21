@@ -8,43 +8,41 @@ body {
   height: 100vh;
 }
 
-.container {
+.memory-game-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: column wrap;
   height: 100%;
-}
 
-.grid-animals-wrap {
-  display: flex;
-  flex-flow: column wrap;
-}
+  .grid-animals-container {
+    display: flex;
+    flex-flow: column wrap;
 
-.grid-animals-container {
-  border: 1px solid #333;
-  align-self: center;
-  margin-top: 3em;
-}
-
-
-
-.grid-animals-row {
-  display: flex;
-}
-
-.grid-animals-cell {
-  border: 1px solid #333;
-  cursor: pointer;
-  display: flex;
-  width: 120px;
-  height: 120px;
-
-  img {
-    display: none;
-  }
-}
-
-.grid-animals-cell_hover:hover {
-  background-color: #F9DC5C;
+    .grid-animals {
+      border: 1px solid #333;
+      align-self: center;
+      margin-top: 3em;
+    
+      .grid-animals__row {
+        display: flex;
+    
+        .grid-animals__cell {
+          border: 1px solid #333;
+          cursor: pointer;
+          display: flex;
+          width: 120px;
+          height: 120px;
+        
+          img {
+            display: none;
+          }
+        }
+    
+        .grid-animals__cell--hover:hover {
+          background-color: #F9DC5C;
+        }
+      }
+    }
+  }  
 }

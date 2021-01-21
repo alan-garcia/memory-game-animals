@@ -10,9 +10,9 @@ let imagesCopy = [...images];
 let imagesFilled = [];
 let imagesSelected = [];
 
-let cells = document.querySelectorAll(".grid-animals-cell");
+let cells = document.querySelectorAll(".grid-animals__cell");
 cells.forEach(cell => {
-  cell.classList.add("grid-animals-cell_hover");
+  cell.classList.add("grid-animals__cell--hover");
   let randomImagePosition = Math.floor(Math.random() * imagesCopy.length);
   let imageName = imagesCopy[randomImagePosition];
 
@@ -41,21 +41,23 @@ function flipCard(event) {
   let currentCell = event.currentTarget;
   let thisAnimal = currentCell.children[0];
   
-  thisAnimal.style.display = "table-cell";
-  imagesSelected.push(thisAnimal);
-  currentCell.classList.remove("grid-animals-cell_hover");
-  if (isCoupleSelected()) {
-    lockBoard = true;
-    if (imagesSelected[0].src !== imagesSelected[1].src) {
-      setTimeout(() => {
-        hideFailSelectedCouple(imagesSelected);
+  if (thisAnimal.style.display !== "block") {
+    thisAnimal.style.display = "block";
+    imagesSelected.push(thisAnimal);
+    currentCell.classList.remove("grid-animals__cell--hover");
+    if (isCoupleSelected()) {
+      lockBoard = true;
+      if (imagesSelected[0].src !== imagesSelected[1].src) {
+        setTimeout(() => {
+          hideFailSelectedCouple(imagesSelected);
+          imagesSelected = [];
+          lockBoard = false;
+        }, 1200);
+      }
+      else {
         imagesSelected = [];
         lockBoard = false;
-      }, 1200);
-    }
-    else {
-      imagesSelected = [];
-      lockBoard = false;
+      }
     }
   }
   
@@ -70,20 +72,20 @@ function isCoupleSelected() {
 
 function hideFailSelectedCouple(imagesSelected) {
   imagesSelected[0].style.display = "none";
-  imagesSelected[0].parentElement.classList.add("grid-animals-cell_hover");
+  imagesSelected[0].parentElement.classList.add("grid-animals__cell--hover");
   imagesSelected[1].style.display = "none";
-  imagesSelected[1].parentElement.classList.add("grid-animals-cell_hover");
+  imagesSelected[1].parentElement.classList.add("grid-animals__cell--hover");
 }
 
 function checkIfGameFinished(cells) {
   let cellsArray = Array.from(cells);
-  let numberOfImagesDisplay = cellsArray.filter(cell => cell.children[0].style.display === "table-cell").length;
+  let numberOfImagesDisplay = cellsArray.filter(cell => cell.children[0].style.display === "block").length;
 
   if (numberOfImagesDisplay === cellsArray.length) {
-    let containerDiv = document.querySelector(".container");
+    let memoryGameWrapperDiv = document.querySelector(".memory-game-wrapper");
     let newH2Element = document.createElement("h2");
     newH2Element.textContent = "¡Juego finalizado!";
-    containerDiv.appendChild(newH2Element);
+    memoryGameWrapperDiv.appendChild(newH2Element);
     return true;
   }
 }
