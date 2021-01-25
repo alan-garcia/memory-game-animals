@@ -9,6 +9,10 @@ let images = ["leon", "elefante", "vaca"];
 let imagesCopy = [...images];
 let imagesFilled = [];
 let imagesSelected = [];
+let cellsPositionsClicked = [];
+
+const board = new Board();
+board.create(2, 3);
 
 let cells = document.querySelectorAll(".grid-animals__cell");
 cells.forEach(cell => {
@@ -16,9 +20,7 @@ cells.forEach(cell => {
   let randomImagePosition = Math.floor(Math.random() * imagesCopy.length);
   let imageName = imagesCopy[randomImagePosition];
 
-  cell.innerHTML = `<img src='${ imagesConfig.path }/${ imageName }${ imagesConfig.extension}'/>`;
   imagesFilled.push(imageName);
-
   deleteRepeatedAnimal(imageName);
 });
 
@@ -39,59 +41,86 @@ function flipCard(event) {
     return;
   }
   let currentCell = event.currentTarget;
-  let thisAnimal = currentCell.children[0];
-  
-  if (thisAnimal.style.display !== "block") {
-    thisAnimal.style.display = "block";
-    imagesSelected.push(thisAnimal);
-    currentCell.classList.remove("grid-animals__cell--hover");
-    if (isCoupleSelected()) {
-      lockBoard = true;
-      if (imagesSelected[0].src !== imagesSelected[1].src) {
-        setTimeout(() => {
-          hideFailSelectedCouple(imagesSelected);
+  let cells = [...currentCell.parentElement.parentElement.children]
+              .map(row => [...row.children])
+              .flat();
+  let cellPositionClicked = [...cells].indexOf(currentCell);
+  cellsPositionsClicked.push(cellPositionClicked);
+
+  // Controla que al seleccionar la segunda imagen de la pareja, no lo cuente como tal hasta que no se seleccione otra celda distinta a la primera imagen.
+  if (isNotClickedInSameCell()) {
+    let thisAnimal = imagesFilled[cellPositionClicked];
+    currentCell.innerHTML = `<img src='${ imagesConfig.path }/${ thisAnimal }${ imagesConfig.extension }'/>`;
+    
+    if (currentCell.children[0].style.display !== "block") {
+      currentCell.children[0].style.display = "block";
+      imagesSelected.push(currentCell);
+      currentCell.classList.remove("grid-animals__cell--hover");
+      if (isCoupleSelected()) {
+        lockBoard = true;
+        cellsPositionsClicked = [];
+        if (imagesSelectedAreNotEquals()) {
+          setTimeout(() => {
+            hideFailSelectedCouple(imagesSelected);
+            imagesSelected = [];
+            lockBoard = false;
+          }, 1200);
+        }
+        else {
+          // Evitamos que se puedan seleccionar parejas ya desveladas previamente.
+          imagesSelected.forEach(image => image.removeEventListener("click", flipCard));
+
           imagesSelected = [];
+          cellsPositionsClicked = [];
           lockBoard = false;
-        }, 1200);
-      }
-      else {
-        imagesSelected = [];
-        lockBoard = false;
+        }
       }
     }
   }
-  
-  if (checkIfGameFinished(cells)) {
-    removeAllEventClickListeners(cells);
+  else {
+    cellsPositionsClicked.pop();
   }
+  
+  checkIfGameFinished(cells);
+}
+
+function isNotClickedInSameCell() {
+  return cellsPositionsClicked[0] !== cellsPositionsClicked[1];
 }
 
 function isCoupleSelected() {
   return imagesSelected.length === 2;
 }
 
+function imagesSelectedAreNotEquals() {
+  return imagesSelected[0].children[0].src !== imagesSelected[1].children[0].src;
+}
+
 function hideFailSelectedCouple(imagesSelected) {
-  imagesSelected[0].style.display = "none";
-  imagesSelected[0].parentElement.classList.add("grid-animals__cell--hover");
-  imagesSelected[1].style.display = "none";
-  imagesSelected[1].parentElement.classList.add("grid-animals__cell--hover");
+  imagesSelected[0].innerHTML = "";
+  imagesSelected[0].classList.add("grid-animals__cell--hover");
+  imagesSelected[1].innerHTML = "";
+  imagesSelected[1].classList.add("grid-animals__cell--hover");
 }
 
 function checkIfGameFinished(cells) {
-  let cellsArray = Array.from(cells);
-  let numberOfImagesDisplay = cellsArray.filter(cell => cell.children[0].style.display === "block").length;
+  let cellsArray = [...cells];
+  
+  let numberOfImagesDisplay = cellsArray.filter(cell => {
+    if (cell.children.length > 0) {
+      return cell.children[0].style.display === "block";
+    }
+  }).length;
 
   if (numberOfImagesDisplay === cellsArray.length) {
-    let memoryGameWrapperDiv = document.querySelector(".memory-game-wrapper");
-    let newH2Element = document.createElement("h2");
-    newH2Element.textContent = "¡Juego finalizado!";
-    memoryGameWrapperDiv.appendChild(newH2Element);
+    createElementGameFinishedText();
     return true;
   }
 }
 
-function removeAllEventClickListeners(cells) {
-  for (let i = 0; i < cells.length; i++) {
-    cells[i].removeEventListener("click", flipCard);
-  }
+function createElementGameFinishedText() {
+  let memoryGameWrapperDiv = document.querySelector(".memory-game-wrapper");
+  let newH2Element = document.createElement("h2");
+  newH2Element.textContent = "¡Juego finalizado!";
+  memoryGameWrapperDiv.appendChild(newH2Element);
 }
