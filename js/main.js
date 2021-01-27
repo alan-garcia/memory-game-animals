@@ -5,26 +5,18 @@ let imagesConfig = {
   extension: ".jpg"
 }
 
-let images = ["leon", "elefante", "vaca"];
+let images = ["leon", "elefante", "vaca", "leon", "elefante", "vaca"];
 let imagesCopy = [...images];
 let imagesFilled = [];
 let imagesSelected = [];
 let cellsPositionsClicked = [];
+let lockBoard = false;
 
 const board = new Board();
 board.create(2, 3);
+imagesFilled = board.shuffleImages(imagesCopy);
 
 let cells = document.querySelectorAll(".grid-animals__cell");
-cells.forEach(cell => {
-  cell.classList.add("grid-animals__cell--hover");
-  let randomImagePosition = Math.floor(Math.random() * imagesCopy.length);
-  let imageName = imagesCopy[randomImagePosition];
-
-  imagesFilled.push(imageName);
-  board.deleteRepeatedAnimal(imageName);
-});
-
-let lockBoard = false;
 cells.forEach(cell => cell.addEventListener("click", flipCard));
 
 function flipCard(event) {

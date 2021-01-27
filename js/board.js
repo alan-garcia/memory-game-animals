@@ -16,6 +16,7 @@ class Board {
       let row = this.createRow(gridAnimalsDiv);
       for (let j = 0; j < numCells; j++) {
         let cell = this.createCell(gridAnimalsDiv);
+        cell.classList.add("grid-animals__cell--hover");
         row.appendChild(cell);
       }
     }
@@ -41,12 +42,15 @@ class Board {
     return gridAnimalsCellDiv;
   }
 
-  deleteRepeatedAnimal(imageName) {
-    let numberOfCurrentAnimalsOnBoard = imagesFilled.filter(animalName => animalName === imageName).length;
-    if (numberOfCurrentAnimalsOnBoard === 2) {
-      imagesCopy = imagesCopy.filter(image => image !== imageName);
+  shuffleImages(imagesCopy) {
+    let temp = 0;
+    
+    for (let i = imagesCopy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      temp = imagesCopy[i];
+      imagesCopy[i] = imagesCopy[j];
+      imagesCopy[j] = temp;
     }
-  
     return imagesCopy;
   }
 
