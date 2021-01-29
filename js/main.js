@@ -5,12 +5,6 @@ const imagesConfig = {
   extension: ".jpg"
 }
 
-// const gameDifficulty = {
-// 	EASY: [2, 3],
-// 	MEDIUM: [4, 4],
-// 	HARD: [6, 6]
-// }
-
 const animals = ["leon", "elefante", "vaca", "perro", "mono", "oveja", "buho", "burro", "caballo", "cerdo", "gallo", "gato", "pato", "pavo", "pollito"];
 let animalsFilled = [];
 let imagesSelected = [];
