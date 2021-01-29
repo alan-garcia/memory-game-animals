@@ -1,38 +1,82 @@
 "use strict";
 
-let imagesConfig = {
+const imagesConfig = {
   path: "images",
   extension: ".jpg"
 }
 
-let images = ["leon", "elefante", "vaca", "leon", "elefante", "vaca"];
-let imagesCopy = [...images];
-let imagesFilled = [];
+// const gameDifficulty = {
+// 	EASY: [2, 3],
+// 	MEDIUM: [4, 4],
+// 	HARD: [6, 6]
+// }
+
+const animals = ["leon", "elefante", "vaca", "perro", "mono", "oveja", "buho", "burro", "caballo", "cerdo", "gallo", "gato", "pato", "pavo", "pollito"];
+let animalsFilled = [];
 let imagesSelected = [];
 let cellsPositionsClicked = [];
 let lockBoard = false;
+let cells = null;
 
 const board = new Board();
-board.create(2, 3);
-imagesFilled = board.shuffleImages(imagesCopy);
 
-let cells = document.querySelectorAll(".grid-animals__cell");
-cells.forEach(cell => cell.addEventListener("click", flipCard));
+document.querySelector(".grid-animals-container__difficulty--easy")
+  .addEventListener("click", selectGameDifficulty);
+
+document.querySelector(".grid-animals-container__difficulty--medium")
+  .addEventListener("click", selectGameDifficulty);
+
+document.querySelector(".grid-animals-container__difficulty--hard")
+  .addEventListener("click", selectGameDifficulty);
+
+function selectGameDifficulty(event) {
+  let difficultySelected = event.currentTarget.className.split("--")[1];
+  if (difficultySelected === "easy") {
+    const numRows = 2;
+    const numCells = 3;
+    let numberOfDistinctAnimalsToShow = (numRows * numCells) / 2;
+    board.create(numRows, numCells);
+    animalsFilled = animals.slice(0, numberOfDistinctAnimalsToShow);
+  }
+  else if (difficultySelected === "medium") {
+    const numRows = 3;
+    const numCells = 4;
+    let numberOfDistinctAnimalsToShow = (numRows * numCells) / 2;
+    board.create(numRows, numCells);
+    animalsFilled = animals.slice(0, numberOfDistinctAnimalsToShow);
+  }
+  else if (difficultySelected === "hard") {
+    const numRows = 5;
+    const numCells = 6;
+    let numberOfDistinctAnimalsToShow = (numRows * numCells) / 2;
+    board.create(numRows, numCells);
+    animalsFilled = animals.slice(0, numberOfDistinctAnimalsToShow);
+  }
+
+  animalsFilled = [...animalsFilled, ...animalsFilled];
+  animalsFilled = board.shuffleImages(animalsFilled);
+
+  const difficulty = document.querySelector(".grid-animals-container__difficulty");
+  difficulty.style.display = "none";
+
+  const gridAnimalsDiv = document.querySelector(".grid-animals");
+  gridAnimalsDiv.style.display = "block";
+
+  cells = document.querySelectorAll(".grid-animals__cell");
+  cells.forEach(cell => cell.addEventListener("click", flipCard));
+}
 
 function flipCard(event) {
   if(lockBoard) {
     return;
   }
   let currentCell = event.currentTarget;
-  let cells = [...currentCell.parentElement.parentElement.children]
-              .map(row => [...row.children])
-              .flat();
   let cellPositionClicked = [...cells].indexOf(currentCell);
   cellsPositionsClicked.push(cellPositionClicked);
 
   // Controla que no sea posible repetir la selección de la pareja hasta que no se seleccione otra celda distinta a la primera imagen.
   if (board.isNotClickedInSameCell()) {
-    let thisAnimal = imagesFilled[cellPositionClicked];
+    let thisAnimal = animalsFilled[cellPositionClicked];
     currentCell.innerHTML = `<img src='${ imagesConfig.path }/${ thisAnimal }${ imagesConfig.extension }'/>`;
     
     if (currentCell.children[0].style.display !== "block") {

@@ -42,16 +42,16 @@ class Board {
     return gridAnimalsCellDiv;
   }
 
-  shuffleImages(imagesCopy) {
+  shuffleImages(animals) {
     let temp = 0;
-    
-    for (let i = imagesCopy.length - 1; i > 0; i--) {
+
+    for (let i = animals.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      temp = imagesCopy[i];
-      imagesCopy[i] = imagesCopy[j];
-      imagesCopy[j] = temp;
+      temp = animals[i];
+      animals[i] = animals[j];
+      animals[j] = temp;
     }
-    return imagesCopy;
+    return animals;
   }
 
   isNotClickedInSameCell() {

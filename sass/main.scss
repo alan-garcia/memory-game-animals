@@ -1,3 +1,8 @@
+$easyDifficultyOptionColor: #34bd34;
+$mediumDifficultyOptionColor: #fa9600;
+$hardDifficultyOptionColor: #ff0000;
+$cellHoverColor: #f9dc5c;
+
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +24,12 @@ body {
     display: flex;
     flex-flow: column wrap;
 
+    .title {
+      text-align: center;
+    }
+
     .grid-animals {
+      display: none;
       border: 1px solid #333;
       align-self: center;
       margin-top: 3em;
@@ -40,9 +50,42 @@ body {
         }
     
         .grid-animals__cell--hover:hover {
-          background-color: #F9DC5C;
+          background-color: $cellHoverColor;
         }
       }
     }
   }  
+}
+
+@mixin setDifficultyColor($difficultyOptionColor) {
+  border: 1px solid $difficultyOptionColor;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.4em;
+  margin-bottom: .7em;
+  padding: .3em;
+  text-align: center;
+  transition: all .3s ease-out;
+
+  &:hover {
+    background-color: $difficultyOptionColor;
+    border: 1px solid darken($difficultyOptionColor, 15%);
+    color: #fff;
+  }
+}
+
+.grid-animals-container__difficulty {
+  margin: 2em 0;
+
+  .grid-animals-container__difficulty--easy {
+    @include setDifficultyColor($easyDifficultyOptionColor);
+  }
+  
+  .grid-animals-container__difficulty--medium {
+    @include setDifficultyColor($mediumDifficultyOptionColor);
+  }
+  
+  .grid-animals-container__difficulty--hard {
+    @include setDifficultyColor($hardDifficultyOptionColor);
+  }
 }
