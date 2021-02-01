@@ -2,6 +2,7 @@ $easyDifficultyOptionColor: #34bd34;
 $mediumDifficultyOptionColor: #fa9600;
 $hardDifficultyOptionColor: #ff0000;
 $cellHoverColor: #f9dc5c;
+$menuButtonColor: #00a2ff;
 
 * {
   margin: 0;
@@ -32,7 +33,7 @@ body {
       display: none;
       border: 1px solid #333;
       align-self: center;
-      margin-top: 3em;
+      margin: 1em 0;
     
       .grid-animals__row {
         display: flex;
@@ -57,15 +58,20 @@ body {
   }  
 }
 
-@mixin setDifficultyColor($difficultyOptionColor) {
-  border: 1px solid $difficultyOptionColor;
+@mixin baseButton {
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s ease-out;
+}
+
+@mixin setDifficultyColor($difficultyOptionColor) {
+  @include baseButton;
+  border: 1px solid $difficultyOptionColor;
   font-size: 1.4em;
   margin-bottom: .7em;
   padding: .3em;
-  text-align: center;
-  transition: all .3s ease-out;
 
   &:hover {
     background-color: $difficultyOptionColor;
@@ -87,5 +93,27 @@ body {
   
   .grid-animals-container__difficulty--hard {
     @include setDifficultyColor($hardDifficultyOptionColor);
+  }
+}
+
+#end-game-message {
+  display: none;
+  margin-bottom: 1em;
+}
+
+.btn {
+  @include baseButton;
+}
+
+#menu-game {
+  background-color: $menuButtonColor;
+  border: 1px solid darken($menuButtonColor, 10%);
+  color: #fff;
+  display: none;
+  padding: .5em;
+
+  &:hover {
+    background-color: transparent;
+    color: $menuButtonColor;
   }
 }

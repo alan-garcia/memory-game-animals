@@ -7,10 +7,10 @@ const imagesConfig = {
 
 const animals = ["leon", "elefante", "vaca", "perro", "mono", "oveja", "buho", "burro", "caballo", "cerdo", "gallo", "gato", "pato", "pavo", "pollito"];
 let animalsFilled = [];
-let imagesSelected = [];
-let cellsPositionsClicked = [];
-let lockBoard = false;
+let imagesSelected = null;
 let cells = null;
+let cellsPositionsClicked = null;
+let lockBoard = false;
 
 const board = new Board();
 
@@ -47,6 +47,8 @@ function selectGameDifficulty(event) {
     animalsFilled = animals.slice(0, numberOfDistinctAnimalsToShow);
   }
 
+  imagesSelected = [];
+  cellsPositionsClicked = [];
   animalsFilled = [...animalsFilled, ...animalsFilled];
   animalsFilled = board.shuffleImages(animalsFilled);
 

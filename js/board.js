@@ -20,6 +20,8 @@ class Board {
         row.appendChild(cell);
       }
     }
+
+    this.showGoBackMenuButton();
   }
 
   createRow(gridAnimalsDiv) {
@@ -83,15 +85,32 @@ class Board {
     }).length;
   
     if (numberOfImagesDisplay === cellsArray.length) {
-      this.createElementGameFinishedText();
+      this.showGameFinished();
       return true;
     }
   }
 
-  createElementGameFinishedText() {
-    let memoryGameWrapperDiv = document.querySelector(".memory-game-wrapper");
-    let newH2Element = document.createElement("h2");
-    newH2Element.textContent = "¡Juego finalizado!";
-    memoryGameWrapperDiv.appendChild(newH2Element);
+  showGameFinished() {
+    const endGameMessage = document.getElementById("end-game-message");
+    endGameMessage.style.display = "block";
+
+    showGoBackMenuButton();
+  }
+
+  showGoBackMenuButton() {
+    const endGameMessage = document.getElementById("end-game-message");
+    const menuGame = document.getElementById("menu-game");
+    menuGame.style.display = "inline-block";
+    menuGame.addEventListener("click", () => {
+      const difficultyDiv = document.querySelector(".grid-animals-container__difficulty");
+      const gridAnimalsDiv = document.querySelector(".grid-animals");
+      const gridAnimalsRowClassDiv = gridAnimalsDiv.children;
+
+      [...gridAnimalsRowClassDiv].forEach(row => row.remove());
+      menuGame.style.display = "none";
+      difficultyDiv.style.display = "block";
+      gridAnimalsDiv.style.display = "none";
+      endGameMessage.style.display = "none";
+    });
   }
 }

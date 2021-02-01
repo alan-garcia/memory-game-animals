@@ -46,7 +46,7 @@ body {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  margin-top: 3em;
+  margin: 1em 0;
 }
 
 .memory-game-wrapper .grid-animals-container .grid-animals .grid-animals__row {
@@ -78,15 +78,16 @@ body {
 }
 
 .grid-animals-container__difficulty .grid-animals-container__difficulty--easy {
-  border: 1px solid #34bd34;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  border: 1px solid #34bd34;
   font-size: 1.4em;
   margin-bottom: .7em;
   padding: .3em;
-  text-align: center;
-  -webkit-transition: all .3s ease-out;
-  transition: all .3s ease-out;
 }
 
 .grid-animals-container__difficulty .grid-animals-container__difficulty--easy:hover {
@@ -96,15 +97,16 @@ body {
 }
 
 .grid-animals-container__difficulty .grid-animals-container__difficulty--medium {
-  border: 1px solid #fa9600;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  border: 1px solid #fa9600;
   font-size: 1.4em;
   margin-bottom: .7em;
   padding: .3em;
-  text-align: center;
-  -webkit-transition: all .3s ease-out;
-  transition: all .3s ease-out;
 }
 
 .grid-animals-container__difficulty .grid-animals-container__difficulty--medium:hover {
@@ -114,15 +116,16 @@ body {
 }
 
 .grid-animals-container__difficulty .grid-animals-container__difficulty--hard {
-  border: 1px solid #ff0000;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  border: 1px solid #ff0000;
   font-size: 1.4em;
   margin-bottom: .7em;
   padding: .3em;
-  text-align: center;
-  -webkit-transition: all .3s ease-out;
-  transition: all .3s ease-out;
 }
 
 .grid-animals-container__difficulty .grid-animals-container__difficulty--hard:hover {
@@ -130,3 +133,31 @@ body {
   border: 1px solid #b30000;
   color: #fff;
 }
+
+#end-game-message {
+  display: none;
+  margin-bottom: 1em;
+}
+
+.btn {
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+}
+
+#menu-game {
+  background-color: #00a2ff;
+  border: 1px solid #0082cc;
+  color: #fff;
+  display: none;
+  padding: .5em;
+}
+
+#menu-game:hover {
+  background-color: transparent;
+  color: #00a2ff;
+}
+/*# sourceMappingURL=main.css.map */
