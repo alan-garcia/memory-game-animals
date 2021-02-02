@@ -94,15 +94,15 @@ class Board {
     const endGameMessage = document.getElementById("end-game-message");
     endGameMessage.style.display = "block";
 
-    showGoBackMenuButton();
+    this.showGoBackMenuButton();
   }
 
   showGoBackMenuButton() {
-    const endGameMessage = document.getElementById("end-game-message");
     const menuGame = document.getElementById("menu-game");
     menuGame.style.display = "inline-block";
     menuGame.addEventListener("click", () => {
       const difficultyDiv = document.querySelector(".grid-animals-container__difficulty");
+      const endGameMessage = document.getElementById("end-game-message");
       const gridAnimalsDiv = document.querySelector(".grid-animals");
       const gridAnimalsRowClassDiv = gridAnimalsDiv.children;
 
@@ -111,6 +111,7 @@ class Board {
       difficultyDiv.style.display = "block";
       gridAnimalsDiv.style.display = "none";
       endGameMessage.style.display = "none";
+      clearTimeout(coupleSelectedTimeOutHandler);
     });
   }
 }

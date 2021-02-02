@@ -14,14 +14,8 @@ let lockBoard = false;
 
 const board = new Board();
 
-document.querySelector(".grid-animals-container__difficulty--easy")
-  .addEventListener("click", selectGameDifficulty);
-
-document.querySelector(".grid-animals-container__difficulty--medium")
-  .addEventListener("click", selectGameDifficulty);
-
-document.querySelector(".grid-animals-container__difficulty--hard")
-  .addEventListener("click", selectGameDifficulty);
+var difficultyList = document.querySelectorAll(".grid-animals-container__difficulty > div");
+difficultyList.forEach(difficulty => difficulty.addEventListener("click", selectGameDifficulty));
 
 function selectGameDifficulty(event) {
   let difficultySelected = event.currentTarget.className.split("--")[1];
@@ -47,6 +41,7 @@ function selectGameDifficulty(event) {
     animalsFilled = animals.slice(0, numberOfDistinctAnimalsToShow);
   }
 
+  lockBoard = false;
   imagesSelected = [];
   cellsPositionsClicked = [];
   animalsFilled = [...animalsFilled, ...animalsFilled];
@@ -83,7 +78,7 @@ function flipCard(event) {
         lockBoard = true;
         cellsPositionsClicked = [];
         if (board.imagesSelectedAreNotEquals()) {
-          setTimeout(() => {
+          window.coupleSelectedTimeOutHandler = setTimeout(() => {
             board.hideFailSelectedCouple(imagesSelected);
             imagesSelected = [];
             lockBoard = false;
