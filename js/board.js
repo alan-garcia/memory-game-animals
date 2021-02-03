@@ -75,6 +75,11 @@ class Board {
     imagesSelected[1].classList.add("grid-animals__cell--hover");
   }
 
+  setNumberOfMovements(numberOfMovements) {
+    const endGameMessage = document.querySelector(".number-movements");
+    endGameMessage.textContent = numberOfMovements;
+  }
+
   checkIfGameFinished(cells) {
     let cellsArray = [...cells];
     
@@ -101,6 +106,7 @@ class Board {
     const menuGame = document.getElementById("menu-game");
     menuGame.style.display = "inline-block";
     menuGame.addEventListener("click", () => {
+      const movements = document.querySelector(".movements");
       const difficultyDiv = document.querySelector(".grid-animals-container__difficulty");
       const endGameMessage = document.getElementById("end-game-message");
       const gridAnimalsDiv = document.querySelector(".grid-animals");
@@ -108,9 +114,12 @@ class Board {
 
       [...gridAnimalsRowClassDiv].forEach(row => row.remove());
       menuGame.style.display = "none";
+      movements.style.display = "none";
       difficultyDiv.style.display = "block";
       gridAnimalsDiv.style.display = "none";
       endGameMessage.style.display = "none";
+
+      this.setNumberOfMovements(0);
       clearTimeout(coupleSelectedTimeOutHandler);
     });
   }

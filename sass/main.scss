@@ -3,6 +3,7 @@ $mediumDifficultyOptionColor: #fa9600;
 $hardDifficultyOptionColor: #ff0000;
 $cellHoverColor: #f9dc5c;
 $menuButtonColor: #00a2ff;
+$fontFamily: Calibri, 'Trebuchet MS', sans-serif;
 
 * {
   margin: 0;
@@ -58,6 +59,18 @@ body {
   }  
 }
 
+.movements {
+  display: none;
+  font-size: 1.4em;
+  margin-top: 1em;
+  text-align: center;
+}
+
+.title,
+.movements {
+  font-family: $fontFamily;
+}
+
 @mixin baseButton {
   border-radius: 5px;
   cursor: pointer;
@@ -69,6 +82,7 @@ body {
 @mixin setDifficultyColor($difficultyOptionColor) {
   @include baseButton;
   border: 1px solid $difficultyOptionColor;
+  font-family: $fontFamily;
   font-size: 1.4em;
   margin-bottom: .7em;
   padding: .3em;

@@ -11,8 +11,10 @@ let imagesSelected = null;
 let cells = null;
 let cellsPositionsClicked = null;
 let lockBoard = false;
+let numberOfMovements = 0;
 
 const board = new Board();
+board.setNumberOfMovements(numberOfMovements);
 
 var difficultyList = document.querySelectorAll(".grid-animals-container__difficulty > div");
 difficultyList.forEach(difficulty => difficulty.addEventListener("click", selectGameDifficulty));
@@ -42,23 +44,22 @@ function selectGameDifficulty(event) {
   }
 
   lockBoard = false;
+  numberOfMovements = 0;
   imagesSelected = [];
   cellsPositionsClicked = [];
   animalsFilled = [...animalsFilled, ...animalsFilled];
   animalsFilled = board.shuffleImages(animalsFilled);
 
-  const difficulty = document.querySelector(".grid-animals-container__difficulty");
-  difficulty.style.display = "none";
-
-  const gridAnimalsDiv = document.querySelector(".grid-animals");
-  gridAnimalsDiv.style.display = "block";
+  document.querySelector(".movements").style.display = "block";
+  document.querySelector(".grid-animals-container__difficulty").style.display = "none";
+  document.querySelector(".grid-animals").style.display = "block";
 
   cells = document.querySelectorAll(".grid-animals__cell");
   cells.forEach(cell => cell.addEventListener("click", flipCard));
 }
 
 function flipCard(event) {
-  if(lockBoard) {
+  if (lockBoard) {
     return;
   }
   let currentCell = event.currentTarget;
@@ -69,13 +70,13 @@ function flipCard(event) {
   if (board.isNotClickedInSameCell()) {
     let thisAnimal = animalsFilled[cellPositionClicked];
     currentCell.innerHTML = `<img src='${ imagesConfig.path }/${ thisAnimal }${ imagesConfig.extension }'/>`;
-    
     if (currentCell.children[0].style.display !== "block") {
       currentCell.children[0].style.display = "block";
       imagesSelected.push(currentCell);
       currentCell.classList.remove("grid-animals__cell--hover");
       if (board.isCoupleSelected()) {
         lockBoard = true;
+        board.setNumberOfMovements(++numberOfMovements);
         cellsPositionsClicked = [];
         if (board.imagesSelectedAreNotEquals()) {
           window.coupleSelectedTimeOutHandler = setTimeout(() => {
