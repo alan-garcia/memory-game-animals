@@ -73,6 +73,18 @@ body {
   background-color: #f9dc5c;
 }
 
+.animate-image-selected {
+  -webkit-animation: flipCard .45s ease-out 0s normal 1 forwards;
+          animation: flipCard .45s ease-out 0s normal 1 forwards;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.animate-match-couple {
+  -webkit-animation: matchSelectedCouple .5s ease-out normal 1 forwards;
+          animation: matchSelectedCouple .5s ease-out normal 1 forwards;
+}
+
 .movements {
   display: none;
   font-size: 1.4em;
@@ -175,4 +187,63 @@ body {
   background-color: transparent;
   color: #00a2ff;
 }
-/*# sourceMappingURL=main.css.map */
+
+@-webkit-keyframes flipCard {
+  0% {
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+  100% {
+    -webkit-backface-visibility: visible !important;
+            backface-visibility: visible !important;
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+}
+
+@keyframes flipCard {
+  0% {
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+  100% {
+    -webkit-backface-visibility: visible !important;
+            backface-visibility: visible !important;
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+}
+
+@-webkit-keyframes matchSelectedCouple {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes matchSelectedCouple {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}

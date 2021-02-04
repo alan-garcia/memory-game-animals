@@ -72,6 +72,7 @@ function flipCard(event) {
     currentCell.innerHTML = `<img src='${ imagesConfig.path }/${ thisAnimal }${ imagesConfig.extension }'/>`;
     if (currentCell.children[0].style.display !== "block") {
       currentCell.children[0].style.display = "block";
+      currentCell.children[0].classList.add("animate-image-selected");
       imagesSelected.push(currentCell);
       currentCell.classList.remove("grid-animals__cell--hover");
       if (board.isCoupleSelected()) {
@@ -83,12 +84,15 @@ function flipCard(event) {
             board.hideFailSelectedCouple(imagesSelected);
             imagesSelected = [];
             lockBoard = false;
-          }, 1200);
+          }, 1100);
         }
         else {
-          // Evitamos que se puedan seleccionar parejas ya desveladas previamente.
-          imagesSelected.forEach(image => image.removeEventListener("click", flipCard));
+          imagesSelected.forEach(image => {
+            image.children[0].classList.add("animate-match-couple");
 
+            // Evitamos que se puedan seleccionar parejas ya desveladas previamente.
+            image.removeEventListener("click", flipCard);
+          }); 
           imagesSelected = [];
           cellsPositionsClicked = [];
           lockBoard = false;

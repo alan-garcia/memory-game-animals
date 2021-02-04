@@ -59,6 +59,15 @@ body {
   }  
 }
 
+.animate-image-selected {
+  animation: flipCard .45s ease-out 0s normal 1 forwards;
+  transform: rotateY(180deg);
+}
+
+.animate-match-couple {
+  animation: matchSelectedCouple .5s ease-out normal 1 forwards;
+}
+
 .movements {
   display: none;
   font-size: 1.4em;
@@ -129,5 +138,31 @@ body {
   &:hover {
     background-color: transparent;
     color: $menuButtonColor;
+  }
+}
+
+@keyframes flipCard {
+  0% {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+  }
+
+  100% {
+    backface-visibility: visible !important;
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes matchSelectedCouple {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+		transform: scale3d(1.2, 1.2, 1.2);
+  }
+  
+  100% {
+    transform: scale3d(1, 1, 1);
   }
 }
