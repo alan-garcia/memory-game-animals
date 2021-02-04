@@ -21,27 +21,7 @@ difficultyList.forEach(difficulty => difficulty.addEventListener("click", select
 
 function selectGameDifficulty(event) {
   let difficultySelected = event.currentTarget.className.split("--")[1];
-  if (difficultySelected === "easy") {
-    const numRows = 2;
-    const numCells = 3;
-    let numberOfDistinctAnimalsToShow = (numRows * numCells) / 2;
-    board.create(numRows, numCells);
-    animalsFilled = animals.slice(0, numberOfDistinctAnimalsToShow);
-  }
-  else if (difficultySelected === "medium") {
-    const numRows = 3;
-    const numCells = 4;
-    let numberOfDistinctAnimalsToShow = (numRows * numCells) / 2;
-    board.create(numRows, numCells);
-    animalsFilled = animals.slice(0, numberOfDistinctAnimalsToShow);
-  }
-  else if (difficultySelected === "hard") {
-    const numRows = 5;
-    const numCells = 6;
-    let numberOfDistinctAnimalsToShow = (numRows * numCells) / 2;
-    board.create(numRows, numCells);
-    animalsFilled = animals.slice(0, numberOfDistinctAnimalsToShow);
-  }
+  board.setDifficulty(difficultySelected);
 
   lockBoard = false;
   numberOfMovements = 0;
@@ -50,6 +30,7 @@ function selectGameDifficulty(event) {
   animalsFilled = [...animalsFilled, ...animalsFilled];
   animalsFilled = board.shuffleImages(animalsFilled);
 
+  document.querySelector(".select-difficulty-text").style.display = "none";
   document.querySelector(".movements").style.display = "block";
   document.querySelector(".grid-animals-container__difficulty").style.display = "none";
   document.querySelector(".grid-animals").style.display = "block";

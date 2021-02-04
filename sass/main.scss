@@ -1,14 +1,11 @@
-$easyDifficultyOptionColor: #34bd34;
-$mediumDifficultyOptionColor: #fa9600;
-$hardDifficultyOptionColor: #ff0000;
-$cellHoverColor: #f9dc5c;
-$menuButtonColor: #00a2ff;
-$fontFamily: Calibri, 'Trebuchet MS', sans-serif;
+@import "_variables.scss";
+@import "_mixins.scss";
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: $fontFamily;
 }
 
 body {
@@ -70,37 +67,13 @@ body {
 
 .movements {
   display: none;
+}
+
+.movements,
+.select-difficulty-text {
   font-size: 1.4em;
   margin-top: 1em;
   text-align: center;
-}
-
-.title,
-.movements {
-  font-family: $fontFamily;
-}
-
-@mixin baseButton {
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  transition: all .3s ease-out;
-}
-
-@mixin setDifficultyColor($difficultyOptionColor) {
-  @include baseButton;
-  border: 1px solid $difficultyOptionColor;
-  font-family: $fontFamily;
-  font-size: 1.4em;
-  margin-bottom: .7em;
-  padding: .3em;
-
-  &:hover {
-    background-color: $difficultyOptionColor;
-    border: 1px solid darken($difficultyOptionColor, 15%);
-    color: #fff;
-  }
 }
 
 .grid-animals-container__difficulty {

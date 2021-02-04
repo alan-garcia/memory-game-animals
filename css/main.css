@@ -3,6 +3,7 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: Calibri, "Trebuchet MS", sans-serif;
 }
 
 body {
@@ -87,14 +88,13 @@ body {
 
 .movements {
   display: none;
+}
+
+.movements,
+.select-difficulty-text {
   font-size: 1.4em;
   margin-top: 1em;
   text-align: center;
-}
-
-.title,
-.movements {
-  font-family: Calibri, "Trebuchet MS", sans-serif;
 }
 
 .grid-animals-container__difficulty {
@@ -109,7 +109,6 @@ body {
   -webkit-transition: all .3s ease-out;
   transition: all .3s ease-out;
   border: 1px solid #34bd34;
-  font-family: Calibri, "Trebuchet MS", sans-serif;
   font-size: 1.4em;
   margin-bottom: .7em;
   padding: .3em;
@@ -129,7 +128,6 @@ body {
   -webkit-transition: all .3s ease-out;
   transition: all .3s ease-out;
   border: 1px solid #fa9600;
-  font-family: Calibri, "Trebuchet MS", sans-serif;
   font-size: 1.4em;
   margin-bottom: .7em;
   padding: .3em;
@@ -149,7 +147,6 @@ body {
   -webkit-transition: all .3s ease-out;
   transition: all .3s ease-out;
   border: 1px solid #ff0000;
-  font-family: Calibri, "Trebuchet MS", sans-serif;
   font-size: 1.4em;
   margin-bottom: .7em;
   padding: .3em;

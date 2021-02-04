@@ -75,6 +75,28 @@ class Board {
     imagesSelected[1].classList.add("grid-animals__cell--hover");
   }
 
+  setDifficulty(difficultySelected) {
+    let numRows = 0;
+    let numCells = 0;
+
+    if (difficultySelected === "easy") {
+      numRows = 2;
+      numCells = 3;
+    }
+    else if (difficultySelected === "medium") {
+      numRows = 3;
+      numCells = 4;
+    }
+    else if (difficultySelected === "hard") {
+      numRows = 5;
+      numCells = 6;
+    }
+
+    let numberOfDistinctAnimalsToShow = (numRows * numCells) / 2;
+    this.create(numRows, numCells);
+    animalsFilled = animals.slice(0, numberOfDistinctAnimalsToShow);
+  }
+
   setNumberOfMovements(numberOfMovements) {
     const endGameMessage = document.querySelector(".number-movements");
     endGameMessage.textContent = numberOfMovements;
@@ -106,18 +128,15 @@ class Board {
     const menuGame = document.getElementById("menu-game");
     menuGame.style.display = "inline-block";
     menuGame.addEventListener("click", () => {
-      const movements = document.querySelector(".movements");
-      const difficultyDiv = document.querySelector(".grid-animals-container__difficulty");
-      const endGameMessage = document.getElementById("end-game-message");
       const gridAnimalsDiv = document.querySelector(".grid-animals");
       const gridAnimalsRowClassDiv = gridAnimalsDiv.children;
-
       [...gridAnimalsRowClassDiv].forEach(row => row.remove());
-      menuGame.style.display = "none";
-      movements.style.display = "none";
-      difficultyDiv.style.display = "block";
+
       gridAnimalsDiv.style.display = "none";
-      endGameMessage.style.display = "none";
+      document.querySelector(".movements").style.display = "none";
+      document.querySelector(".select-difficulty-text").style.display = "block";
+      document.querySelector(".grid-animals-container__difficulty").style.display = "block";
+      document.getElementById("end-game-message").style.display = "none";
 
       this.setNumberOfMovements(0);
       clearTimeout(coupleSelectedTimeOutHandler);
