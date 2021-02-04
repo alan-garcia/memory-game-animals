@@ -137,6 +137,7 @@ class Board {
       document.querySelector(".select-difficulty-text").style.display = "block";
       document.querySelector(".grid-animals-container__difficulty").style.display = "block";
       document.getElementById("end-game-message").style.display = "none";
+      document.getElementById("menu-game").style.display = "none";
 
       this.setNumberOfMovements(0);
       clearTimeout(coupleSelectedTimeOutHandler);
