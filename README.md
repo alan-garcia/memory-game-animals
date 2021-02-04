@@ -1,7 +1,12 @@
 # Memory game animals
 
-El juego de las parejas, versión con fotos de animales, la cual permite seleccionar la dificultad del juego: **Fácil**, **Medio**, **Difícil**.
+El juego de las parejas, versión con fotos de animales, la cual permite seleccionar la dificultad del juego: **Fácil**, **Medio**, y **Difícil**.
 
+## Capturas
+
+![menú principal](https://github.com/alan-garcia/memory-game-animals/blob/main/images/screenshots/nivel-dificultad.png?raw=true)
+![dificultad fácil](https://github.com/alan-garcia/memory-game-animals/blob/main/images/screenshots/dificultad-facil.png?raw=true)
+![dificultad fácil final de la partida](https://github.com/alan-garcia/memory-game-animals/blob/main/images/screenshots/dificultad-facil-fin-partida.png?raw=true)
 
 ## Atribución
 
