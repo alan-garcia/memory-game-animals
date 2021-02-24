@@ -1,4 +1,4 @@
-import { Board } from '../js/board.js';
+import { Board } from './board.js';
 const imagesConfig = {
     path: "images",
     extension: ".jpg"

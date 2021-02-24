@@ -1,3 +1,4 @@
+import { Difficulty } from '../js/difficulty.js';
 export class Board {
     constructor() { }
     static getInstance() {
@@ -51,7 +52,8 @@ export class Board {
         return imagesSelected.length === 2;
     }
     imagesSelectedAreNotEquals(imagesSelected) {
-        return imagesSelected[0].children[0].src !== imagesSelected[1].children[0].src;
+        return imagesSelected[0].children[0].src !==
+            imagesSelected[1].children[0].src;
     }
     hideFailSelectedCouple(imagesSelected) {
         imagesSelected[0].innerHTML = "";
@@ -62,15 +64,15 @@ export class Board {
     setDifficulty(difficultySelected) {
         let numRows = 0;
         let numCells = 0;
-        if (difficultySelected === "easy") {
+        if (difficultySelected === Difficulty.EASY) {
             numRows = 2;
             numCells = 3;
         }
-        else if (difficultySelected === "medium") {
+        else if (difficultySelected === Difficulty.MEDIUM) {
             numRows = 3;
             numCells = 4;
         }
-        else if (difficultySelected === "hard") {
+        else if (difficultySelected === Difficulty.HARD) {
             numRows = 5;
             numCells = 6;
         }
@@ -79,8 +81,7 @@ export class Board {
         return numberOfDistinctAnimalsToShow;
     }
     setNumberOfMovements(movement) {
-        const endGameMessage = document.querySelector(".number-movements");
-        endGameMessage.textContent = movement;
+        document.querySelector(".number-movements").textContent = movement.toString();
     }
     checkIfGameFinished(cells) {
         let cellsArray = [...cells];
@@ -97,18 +98,17 @@ export class Board {
         return isGameFinished;
     }
     showGameFinished() {
-        const endGameMessage = document.getElementById("end-game-message");
-        endGameMessage.style.display = "block";
+        document.getElementById("end-game-message").style.display = "block";
         this.showGoBackMenuButton();
     }
     showGoBackMenuButton() {
-        const menuGame = document.getElementById("menu-game");
-        menuGame.style.display = "inline-block";
-        menuGame.addEventListener("click", () => {
+        const menuGameElement = document.getElementById("menu-game");
+        menuGameElement.style.display = "inline-block";
+        menuGameElement.addEventListener("click", () => {
             const gridAnimalsDiv = document.querySelector(".grid-animals");
+            gridAnimalsDiv.style.display = "none";
             const gridAnimalsRowClassDiv = gridAnimalsDiv.children;
             [...gridAnimalsRowClassDiv].forEach(row => row.remove());
-            gridAnimalsDiv.style.display = "none";
             document.querySelector(".movements").style.display = "block";
             document.querySelector(".select-difficulty-text").style.display = "none";
             document.querySelector(".grid-animals-container__difficulty").style.display = "block";

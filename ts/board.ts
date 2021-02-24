@@ -1,6 +1,8 @@
+import { Difficulty } from './difficulty';
+
 export class Board {
   private static instance: Board;
-
+  
   private constructor() { }
 
   public static getInstance(): Board {
@@ -10,8 +12,8 @@ export class Board {
     return Board.instance;
   }
 
-  create(numRows: number, numCells: number) {
-    let gridAnimalsDiv = document.querySelector(".grid-animals") as HTMLDivElement;
+  create(numRows: number, numCells: number): void {
+    let gridAnimalsDiv = <HTMLDivElement>document.querySelector(".grid-animals");
 
     for (let i = 0; i < numRows; i++) {
       let row = this.createRow(gridAnimalsDiv);
@@ -25,7 +27,7 @@ export class Board {
     this.showGoBackMenuButton();
   }
 
-  createRow(gridAnimalsDiv: HTMLDivElement) {
+  createRow(gridAnimalsDiv: HTMLDivElement): HTMLDivElement {
     let gridAnimalsRowDiv: HTMLDivElement = document.createElement("div");
     let gridAnimalsRowClassDiv: Attr = document.createAttribute("class");
     gridAnimalsRowClassDiv.value = "grid-animals__row";
@@ -35,7 +37,7 @@ export class Board {
     return gridAnimalsRowDiv;
   }
 
-  createCell(gridAnimalsDiv: any) {
+  createCell(gridAnimalsDiv: HTMLDivElement): HTMLDivElement {
     let gridAnimalsCellDiv: HTMLDivElement = document.createElement("div");
     let gridAnimalsCellClassDiv: Attr = document.createAttribute("class");
     gridAnimalsCellClassDiv.value = "grid-animals__cell";
@@ -45,7 +47,7 @@ export class Board {
     return gridAnimalsCellDiv;
   }
 
-  shuffleImages(animals: string[]) {
+  shuffleImages(animals: string[]): string[] {
     let temp: string;
 
     for (let i = animals.length - 1; i > 0; i--) {
@@ -54,22 +56,24 @@ export class Board {
       animals[i] = animals[j];
       animals[j] = temp;
     }
+
     return animals;
   }
 
-  isNotClickedInSameCell(cellsPositionsClicked: number[]) {
+  isNotClickedInSameCell(cellsPositionsClicked: number[]): boolean {
     return cellsPositionsClicked[0] !== cellsPositionsClicked[1];
   }
 
-  isCoupleSelected(imagesSelected: HTMLDivElement[]) {
+  isCoupleSelected(imagesSelected: HTMLDivElement[]): boolean {
     return imagesSelected.length === 2;
   }
 
-  imagesSelectedAreNotEquals(imagesSelected: HTMLDivElement[]) {
-    return (imagesSelected[0].children[0] as HTMLImageElement).src !== (imagesSelected[1].children[0] as HTMLImageElement).src;
+  imagesSelectedAreNotEquals(imagesSelected: HTMLDivElement[]): boolean {
+    return (<HTMLImageElement>imagesSelected[0].children[0]).src !== 
+           (<HTMLImageElement>imagesSelected[1].children[0]).src;
   }
 
-  hideFailSelectedCouple(imagesSelected: HTMLDivElement[]) {
+  hideFailSelectedCouple(imagesSelected: HTMLDivElement[]): void {
     imagesSelected[0].innerHTML = "";
     imagesSelected[0].classList.add("grid-animals__cell--hover");
     imagesSelected[1].innerHTML = "";
@@ -80,15 +84,15 @@ export class Board {
     let numRows: number = 0;
     let numCells: number = 0;
 
-    if (difficultySelected === "easy") {
+    if (difficultySelected === Difficulty.EASY) {
       numRows = 2;
       numCells = 3;
     }
-    else if (difficultySelected === "medium") {
+    else if (difficultySelected === Difficulty.MEDIUM) {
       numRows = 3;
       numCells = 4;
     }
-    else if (difficultySelected === "hard") {
+    else if (difficultySelected === Difficulty.HARD) {
       numRows = 5;
       numCells = 6;
     }
@@ -99,9 +103,8 @@ export class Board {
     return numberOfDistinctAnimalsToShow;
   }
 
-  setNumberOfMovements(movement: number) {
-    const endGameMessage: HTMLSpanElement = document.querySelector(".number-movements") as HTMLSpanElement;
-    endGameMessage.textContent = (movement as unknown) as string;
+  setNumberOfMovements(movement: number): void {
+    (<HTMLSpanElement>document.querySelector(".number-movements")).textContent = movement.toString();
   }
 
   checkIfGameFinished(cells: NodeListOf<HTMLDivElement>): boolean {
@@ -110,7 +113,7 @@ export class Board {
 
     let numberOfImagesDisplay = cellsArray.filter(cell => {
       if (cell.children.length > 0) {
-        return (cell.children[0] as HTMLElement).style.display === "block";
+        return (<HTMLElement>cell.children[0]).style.display === "block";
       }
     }).length;
   
@@ -122,27 +125,27 @@ export class Board {
     return isGameFinished;
   }
 
-  showGameFinished() {
-    const endGameMessage: HTMLSpanElement = document.getElementById("end-game-message") as HTMLSpanElement;
-    endGameMessage.style.display = "block";
+  showGameFinished(): void {
+    (<HTMLSpanElement>document.getElementById("end-game-message")).style.display = "block";
 
     this.showGoBackMenuButton();
   }
 
-  showGoBackMenuButton() {
-    const menuGame: HTMLAnchorElement = document.getElementById("menu-game") as HTMLAnchorElement;
-    menuGame.style.display = "inline-block";
-    menuGame.addEventListener("click", (): void => {
-      const gridAnimalsDiv: HTMLDivElement = document.querySelector(".grid-animals") as HTMLDivElement;
+  showGoBackMenuButton(): void {
+    const menuGameElement: HTMLAnchorElement = <HTMLAnchorElement>document.getElementById("menu-game");
+    menuGameElement.style.display = "inline-block";
+    menuGameElement.addEventListener("click", (): void => {
+      const gridAnimalsDiv: HTMLDivElement = <HTMLDivElement>document.querySelector(".grid-animals");
+      gridAnimalsDiv.style.display = "none";
+
       const gridAnimalsRowClassDiv: HTMLCollection = gridAnimalsDiv.children;
       [...gridAnimalsRowClassDiv].forEach(row => row.remove());
 
-      gridAnimalsDiv.style.display = "none";
-      (document.querySelector(".movements") as HTMLParagraphElement).style.display = "block";
-      (document.querySelector(".select-difficulty-text") as HTMLParagraphElement).style.display = "none";
-      (document.querySelector(".grid-animals-container__difficulty") as HTMLParagraphElement).style.display = "block";
-      (document.getElementById("end-game-message") as HTMLSpanElement).style.display = "none";
-      (document.getElementById("menu-game") as HTMLAnchorElement).style.display = "none";
+      (<HTMLParagraphElement>document.querySelector(".movements")).style.display = "block";
+      (<HTMLParagraphElement>document.querySelector(".select-difficulty-text")).style.display = "none";
+      (<HTMLParagraphElement>document.querySelector(".grid-animals-container__difficulty")).style.display = "block";
+      (<HTMLSpanElement>document.getElementById("end-game-message")).style.display = "none";
+      (<HTMLAnchorElement>document.getElementById("menu-game")).style.display = "none";
 
       this.setNumberOfMovements(0);
       clearTimeout(globalThis.time);

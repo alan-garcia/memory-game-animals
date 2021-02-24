@@ -32,16 +32,16 @@ function selectGameDifficulty(event: any) {
   animalsFilled = [...animalsFilled, ...animalsFilled];
   animalsFilled = board.shuffleImages(animalsFilled);
 
-  (document.querySelector(".select-difficulty-text") as HTMLParagraphElement).style.display = "none";
-  (document.querySelector(".movements") as HTMLParagraphElement).style.display = "block";
-  (document.querySelector(".grid-animals-container__difficulty") as HTMLParagraphElement).style.display = "none";
-  (document.querySelector(".grid-animals") as HTMLParagraphElement).style.display = "block";
+  (<HTMLParagraphElement>document.querySelector(".select-difficulty-text")).style.display = "none";
+  (<HTMLParagraphElement>document.querySelector(".movements")).style.display = "block";
+  (<HTMLParagraphElement>document.querySelector(".grid-animals-container__difficulty")).style.display = "none";
+  (<HTMLParagraphElement>document.querySelector(".grid-animals")).style.display = "block";
 
   cells = document.querySelectorAll(".grid-animals__cell");
   cells.forEach(cell => cell.addEventListener("click", flipCard));
 }
 
-function flipCard(event: any) {
+function flipCard(event: any): void {
   if (lockBoard) {
     return;
   }
@@ -53,9 +53,9 @@ function flipCard(event: any) {
   if (board.isNotClickedInSameCell(cellsPositionsClicked)) {
     let thisAnimal: string = animalsFilled[cellPositionClicked];
     currentCell.innerHTML = `<img src='${ imagesConfig.path }/${ thisAnimal }${ imagesConfig.extension }'/>`;
-    if ((currentCell.children[0] as HTMLElement).style.display !== "block") {
-      (currentCell.children[0] as HTMLElement).style.display = "block";
-      (currentCell.children[0] as HTMLElement).classList.add("animate-image-selected");
+    if ((<HTMLElement>currentCell.children[0]).style.display !== "block") {
+      (<HTMLElement>currentCell.children[0]).style.display = "block";
+      (<HTMLElement>currentCell.children[0]).classList.add("animate-image-selected");
       imagesSelected.push(currentCell);
       currentCell.classList.remove("grid-animals__cell--hover");
       if (board.isCoupleSelected(imagesSelected)) {
