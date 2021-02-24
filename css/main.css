@@ -75,8 +75,8 @@ body {
 }
 
 .animate-image-selected {
-  -webkit-animation: flipCard .45s ease-out 0s normal 1 forwards;
-          animation: flipCard .45s ease-out 0s normal 1 forwards;
+  -webkit-animation: flipCard .4s ease-out 0s normal 1 forwards;
+          animation: flipCard .4s ease-out 0s normal 1 forwards;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
 }
@@ -244,3 +244,4 @@ body {
             transform: scale3d(1, 1, 1);
   }
 }
+/*# sourceMappingURL=main.css.map */
