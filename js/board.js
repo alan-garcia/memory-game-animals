@@ -109,8 +109,8 @@ export class Board {
             gridAnimalsDiv.style.display = "none";
             const gridAnimalsRowClassDiv = gridAnimalsDiv.children;
             [...gridAnimalsRowClassDiv].forEach(row => row.remove());
-            document.querySelector(".movements").style.display = "block";
-            document.querySelector(".select-difficulty-text").style.display = "none";
+            document.querySelector(".movements").style.display = "none";
+            document.querySelector(".select-difficulty-text").style.display = "block";
             document.querySelector(".grid-animals-container__difficulty").style.display = "block";
             document.getElementById("end-game-message").style.display = "none";
             document.getElementById("menu-game").style.display = "none";

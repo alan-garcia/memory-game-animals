@@ -141,8 +141,8 @@ export class Board {
       const gridAnimalsRowClassDiv: HTMLCollection = gridAnimalsDiv.children;
       [...gridAnimalsRowClassDiv].forEach(row => row.remove());
 
-      (<HTMLParagraphElement>document.querySelector(".movements")).style.display = "block";
-      (<HTMLParagraphElement>document.querySelector(".select-difficulty-text")).style.display = "none";
+      (<HTMLParagraphElement>document.querySelector(".movements")).style.display = "none";
+      (<HTMLParagraphElement>document.querySelector(".select-difficulty-text")).style.display = "block";
       (<HTMLParagraphElement>document.querySelector(".grid-animals-container__difficulty")).style.display = "block";
       (<HTMLSpanElement>document.getElementById("end-game-message")).style.display = "none";
       (<HTMLAnchorElement>document.getElementById("menu-game")).style.display = "none";
