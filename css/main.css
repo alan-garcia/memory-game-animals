@@ -3,31 +3,245 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: Calibri, "Trebuchet MS", sans-serif;
 }
 
-.container {
-  width: 960px;
-  margin: 20px;
+body {
+  height: 100vh;
 }
 
-.grid-animals-container {
-  display: table;
+.memory-game-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  height: 100%;
+}
+
+.memory-game-wrapper .grid-animals-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+}
+
+.memory-game-wrapper .grid-animals-container .title {
+  text-align: center;
+}
+
+.memory-game-wrapper .grid-animals-container .grid-animals {
+  display: none;
   border: 1px solid #333;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: 1em 0;
 }
 
-.grid-animals-row {
-  display: table-row;
+.memory-game-wrapper .grid-animals-container .grid-animals .grid-animals__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.grid-animals-cell {
+.memory-game-wrapper .grid-animals-container .grid-animals .grid-animals__row .grid-animals__cell {
   border: 1px solid #333;
   cursor: pointer;
-  display: table-cell;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   width: 120px;
   height: 120px;
 }
 
-.grid-animals-cell_hover {
-  background-color: #F9DC5C;
+.memory-game-wrapper .grid-animals-container .grid-animals .grid-animals__row .grid-animals__cell img {
+  display: none;
+}
+
+.memory-game-wrapper .grid-animals-container .grid-animals .grid-animals__row .grid-animals__cell--hover:hover {
+  background-color: #f9dc5c;
+}
+
+.animate-image-selected {
+  -webkit-animation: flipCard .4s ease-out 0s normal 1 forwards;
+          animation: flipCard .4s ease-out 0s normal 1 forwards;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.animate-match-couple {
+  -webkit-animation: matchSelectedCouple .5s ease-out normal 1 forwards;
+          animation: matchSelectedCouple .5s ease-out normal 1 forwards;
+}
+
+.movements {
+  display: none;
+}
+
+.movements,
+.select-difficulty-text {
+  font-size: 1.4em;
+  margin-top: 1em;
+  text-align: center;
+}
+
+.grid-animals-container__difficulty {
+  margin: 2em 0;
+}
+
+.grid-animals-container__difficulty .grid-animals-container__difficulty--easy {
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  border: 1px solid #34bd34;
+  font-size: 1.4em;
+  margin-bottom: .7em;
+  padding: .3em;
+}
+
+.grid-animals-container__difficulty .grid-animals-container__difficulty--easy:hover {
+  background-color: #34bd34;
+  border: 1px solid #238123;
+  color: #fff;
+}
+
+.grid-animals-container__difficulty .grid-animals-container__difficulty--medium {
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  border: 1px solid #fa9600;
+  font-size: 1.4em;
+  margin-bottom: .7em;
+  padding: .3em;
+}
+
+.grid-animals-container__difficulty .grid-animals-container__difficulty--medium:hover {
+  background-color: #fa9600;
+  border: 1px solid #ae6800;
+  color: #fff;
+}
+
+.grid-animals-container__difficulty .grid-animals-container__difficulty--hard {
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  border: 1px solid #ff0000;
+  font-size: 1.4em;
+  margin-bottom: .7em;
+  padding: .3em;
+}
+
+.grid-animals-container__difficulty .grid-animals-container__difficulty--hard:hover {
+  background-color: #ff0000;
+  border: 1px solid #b30000;
+  color: #fff;
+}
+
+#end-game-message {
+  display: none;
+  margin-bottom: 1em;
+}
+
+.btn {
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+}
+
+#menu-game {
+  background-color: #00a2ff;
+  border: 1px solid #0082cc;
+  color: #fff;
+  display: none;
+  padding: .5em;
+}
+
+#menu-game:hover {
+  background-color: transparent;
+  color: #00a2ff;
+}
+
+@-webkit-keyframes flipCard {
+  0% {
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+  100% {
+    -webkit-backface-visibility: visible !important;
+            backface-visibility: visible !important;
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+}
+
+@keyframes flipCard {
+  0% {
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+  100% {
+    -webkit-backface-visibility: visible !important;
+            backface-visibility: visible !important;
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+}
+
+@-webkit-keyframes matchSelectedCouple {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes matchSelectedCouple {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
 }
 /*# sourceMappingURL=main.css.map */

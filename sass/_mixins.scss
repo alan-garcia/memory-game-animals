@@ -1,0 +1,21 @@
+@mixin baseButton {
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s ease-out;
+}
+
+@mixin setDifficultyColor($difficultyOptionColor) {
+  @include baseButton;
+  border: 1px solid $difficultyOptionColor;
+  font-size: 1.4em;
+  margin-bottom: .7em;
+  padding: .3em;
+
+  &:hover {
+    background-color: $difficultyOptionColor;
+    border: 1px solid darken($difficultyOptionColor, 15%);
+    color: #fff;
+  }
+}

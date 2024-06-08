@@ -1,31 +1,141 @@
+@import "_variables.scss";
+@import "_mixins.scss";
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: $fontFamily;
 }
 
-.container {
-  width: 960px;
-  margin: 20px;
+body {
+  height: 100vh;
 }
 
-.grid-animals-container {
-  display: table;
-  border: 1px solid #333;
+.memory-game-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  height: 100%;
+
+  .grid-animals-container {
+    display: flex;
+    flex-flow: column wrap;
+
+    .title {
+      text-align: center;
+    }
+
+    .grid-animals {
+      display: none;
+      border: 1px solid #333;
+      align-self: center;
+      margin: 1em 0;
+    
+      .grid-animals__row {
+        display: flex;
+    
+        .grid-animals__cell {
+          border: 1px solid #333;
+          cursor: pointer;
+          display: flex;
+          width: 120px;
+          height: 120px;
+        
+          img {
+            display: none;
+          }
+        }
+    
+        .grid-animals__cell--hover:hover {
+          background-color: $cellHoverColor;
+        }
+      }
+    }
+  }  
 }
 
-.grid-animals-row {
-  display: table-row;
+.animate-image-selected {
+  animation: flipCard .4s ease-out 0s normal 1 forwards;
+  transform: rotateY(180deg);
 }
 
-.grid-animals-cell {
-  border: 1px solid #333;
-  cursor: pointer;
-  display: table-cell;
-  width: 120px;
-  height: 120px;
+.animate-match-couple {
+  animation: matchSelectedCouple .5s ease-out normal 1 forwards;
 }
 
-.grid-animals-cell_hover {
-  background-color: #F9DC5C;
+.movements {
+  display: none;
+}
+
+.movements,
+.select-difficulty-text {
+  font-size: 1.4em;
+  margin-top: 1em;
+  text-align: center;
+}
+
+.grid-animals-container__difficulty {
+  margin: 2em 0;
+
+  .grid-animals-container__difficulty--easy {
+    @include setDifficultyColor($easyDifficultyOptionColor);
+  }
+  
+  .grid-animals-container__difficulty--medium {
+    @include setDifficultyColor($mediumDifficultyOptionColor);
+  }
+  
+  .grid-animals-container__difficulty--hard {
+    @include setDifficultyColor($hardDifficultyOptionColor);
+  }
+}
+
+#end-game-message {
+  display: none;
+  margin-bottom: 1em;
+}
+
+.btn {
+  @include baseButton;
+}
+
+#menu-game {
+  background-color: $menuButtonColor;
+  border: 1px solid darken($menuButtonColor, 10%);
+  color: #fff;
+  display: none;
+  padding: .5em;
+
+  &:hover {
+    background-color: transparent;
+    color: $menuButtonColor;
+  }
+}
+
+@keyframes flipCard {
+  0% {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+  }
+
+  100% {
+    backface-visibility: visible !important;
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes matchSelectedCouple {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+		transform: scale3d(1.2, 1.2, 1.2);
+  }
+  
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
 }
