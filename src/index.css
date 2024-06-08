@@ -6,5 +6,59 @@
 
 body {
   display: flex;
+  justify-content: center;
   place-items: center;
+  margin: auto;
+}
+
+.parejas-inicio-container {
+  text-align: center;
+}
+
+.parejas-dificultad {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-flow: column wrap;
+}
+
+.parejas-dificultad-recuadro {
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px;
+  padding: .5rem 0;
+  margin-bottom: 1rem;
+  width: 80%;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+}
+
+.dificultad-facil {
+  border: 1px solid rgb(16, 219, 16);
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    background-color: rgb(16, 219, 16);
+    color: #fff;
+  }
+}
+
+.dificultad-medio {
+  border: 1px solid rgb(255, 164, 27);
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    background-color: rgb(255, 164, 27);
+    color: #fff;
+  }
+}
+
+.dificultad-dificil {
+  border: 1px solid rgb(255, 46, 46);
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    background-color: rgb(255, 46, 46);
+    color: #fff;
+  }
 }
