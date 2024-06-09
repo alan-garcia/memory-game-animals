@@ -5,8 +5,6 @@ function App() {
   const [openJugar, setOpenJugar] = useState(false);
   const [celdas, setCeldas] = useState<JSX.Element[]>([]);
 
-  const reiniciarPartida = () => setOpenJugar(false);
-
   const getDificultad = (event) => {
     let numFilas = 0;
     let numCeldas = 0;
@@ -52,6 +50,8 @@ function App() {
     
     return filas;
   };
+
+  const reiniciarPartida = () => setOpenJugar(false);
 
   return (
     <>
