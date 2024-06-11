@@ -2,6 +2,12 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+
+  --dificultad-facil-bgcolor: rgb(16, 219, 16);
+  --dificultad-medio-bgcolor: rgb(255, 164, 27);
+  --dificultad-dificil-bgcolor: rgb(255, 46, 46);
+  --boton-bgcolor: rgb(0, 132, 255);
+  --celda-bgcolor: #ffe46d;
 }
 
 body {
@@ -34,31 +40,31 @@ body {
 }
 
 .dificultad-facil {
-  border: 1px solid rgb(16, 219, 16);
+  border: 1px solid var(--dificultad-facil-bgcolor);
   transition: all .3s ease-in-out;
 
   &:hover {
-    background-color: rgb(16, 219, 16);
+    background-color: var(--dificultad-facil-bgcolor);
     color: #fff;
   }
 }
 
 .dificultad-medio {
-  border: 1px solid rgb(255, 164, 27);
+  border: 1px solid var(--dificultad-medio-bgcolor);
   transition: all .3s ease-in-out;
 
   &:hover {
-    background-color: rgb(255, 164, 27);
+    background-color: var(--dificultad-medio-bgcolor);
     color: #fff;
   }
 }
 
 .dificultad-dificil {
-  border: 1px solid rgb(255, 46, 46);
+  border: 1px solid var(--dificultad-dificil-bgcolor);
   transition: all .3s ease-in-out;
 
   &:hover {
-    background-color: rgb(255, 46, 46);
+    background-color: var(--dificultad-dificil-bgcolor);
     color: #fff;
   }
 }
@@ -79,7 +85,7 @@ body {
       margin: .2rem;
 
       &:hover {
-        background-color: #ffe46d;
+        background-color: var(--celda-bgcolor);
       }
     }
   }
@@ -89,8 +95,8 @@ body {
   cursor: pointer;
   padding: .6rem 1rem;
   border-radius: 6px;
-  background-color: rgb(0, 132, 255);
-  border: 1px solid rgb(0, 132, 255);
+  background-color: var(--boton-bgcolor);
+  border: 1px solid var(--boton-bgcolor);
   color: #fff;
   margin-top: 1rem;
 }
