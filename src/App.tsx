@@ -8,8 +8,8 @@ function App() {
   const [numFilas, setNumFilas] = useState(0);
   const [numCeldas, setNumCeldas] = useState(0);
   const [images, setImages] = useState<string[]>([]);
-  const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
-  const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
+  const [indicesImagenesVolteadas, setIndicesImagenesVolteadas] = useState<number[]>([]);
+  const [indicesImagenesCoincidentes, setIndicesImagenesCoincidentes] = useState<number[]>([]);
 
   const selectDificultad = (event) => {
     let filas: number = 0;
@@ -37,11 +37,11 @@ function App() {
     setNumCeldas(celdas);
     const numeroParejas: number = (filas * celdas) / 2;
 
-    setImages(generateImagePairs(numeroParejas));
+    setImages(generarParejaImagenes(numeroParejas));
     setOpenJugar(true);
   };
 
-  const generateImagePairs = (numeroParejas: number) => {
+  const generarParejaImagenes = (numeroParejas: number) => {
     const images: string[] = [];
     for (let i: number = 0; i < numeroParejas; i++) {
       const img: string = imagenes[i % imagenes.length].src;
@@ -53,48 +53,24 @@ function App() {
 
   const voltear = (event) => {
     const indice: number = (event.target.firstChild === null) ? event.target.parentElement.firstChild.dataset.indice : event.target.firstChild.dataset.indice;
-    if (flippedIndices.length < 2 && !flippedIndices.includes(indice) && !matchedIndices.includes(indice)) {
+    if (existenParejasPorVoltear() && !parejasPorVoltearCoinciden(indice) && !parejasSeleccionadasCoinciden(indice)) {
       event.target.classList.add("flipped");
-      setFlippedIndices((prev) => [...prev, indice]);
+      setIndicesImagenesVolteadas((prev) => [...prev, indice]);
     }
-    else if (flippedIndices.length === 2) {
-      const [firstIndex, secondIndex] = flippedIndices;
+    else if (parejasSeleccionadas()) {
+      const [firstIndex, secondIndex] = indicesImagenesVolteadas;
       if (images[firstIndex] === images[secondIndex]) {
-        setMatchedIndices((prev) => [...prev, firstIndex, secondIndex]);
-        setFlippedIndices([]);
+        setIndicesImagenesCoincidentes((prev) => [...prev, firstIndex, secondIndex]);
+        setIndicesImagenesVolteadas([]);
       }
       else {
         setTimeout(() => {
-          flippedIndices.filter(ind => {
-            if (ind !== matchedIndices[ind]) {
-              document.querySelectorAll(".celda")[ind].classList.remove("flipped");
-            } 
-          });
-          setFlippedIndices([]);
+          enderezarParejasSeleccionadas();
+          setIndicesImagenesVolteadas([]);
         }, 1000);
       }
     }
   };
-
-  useEffect(() => {
-    if (flippedIndices.length === 2) {
-      const [firstIndex, secondIndex] = flippedIndices;
-      if (images[firstIndex] === images[secondIndex]) {
-        setMatchedIndices((prev) => [...prev, firstIndex, secondIndex]);
-        setFlippedIndices([]);
-      }
-      else {
-        setTimeout(() => {
-          flippedIndices.filter(ind => {
-            if (ind !== matchedIndices[ind]) {
-              document.querySelectorAll(".celda")[ind].classList.remove("flipped");
-            } 
-          });
-          setFlippedIndices([]);
-        }, 1000);
-      }
-    }
-  }, [flippedIndices, images, matchedIndices]);
 
   const generarCeldas = () => {
     const filas: JSX.Element[] = [];
@@ -105,7 +81,7 @@ function App() {
       for (let j: number = 0; j < numCeldas; j++) {
         celdas.push(
           <div key={`celda-${i}-${j}`}
-            className={`celda ${flippedIndices.includes(indice) || matchedIndices.includes(indice) ? 'flipped' : ''}`}
+            className={`celda ${indicesImagenesVolteadas.includes(indice) || indicesImagenesCoincidentes.includes(indice) ? 'flipped' : ''}`}
             onClick={(event) => voltear(event)}
           >
             <div className="back" data-indice={indice} style={{ backgroundImage: `url(${images[indice]})` }}></div>
@@ -122,11 +98,43 @@ function App() {
     return filas;
   };
 
+  const parejasSeleccionadas = () => indicesImagenesVolteadas.length === 2;
+
+  const existenParejasPorVoltear = () => indicesImagenesVolteadas.length < 2;
+
+  const parejasPorVoltearCoinciden = (indice: number) => indicesImagenesVolteadas.includes(indice);
+
+  const parejasSeleccionadasCoinciden = (indice: number) => indicesImagenesCoincidentes.includes(indice);
+
+  const enderezarParejasSeleccionadas = () => {
+    indicesImagenesVolteadas.filter(indice => {
+      if (indice !== indicesImagenesCoincidentes[indice]) {
+        document.querySelectorAll(".celda")[indice].classList.remove("flipped");
+      } 
+    });
+  }
+
   const reiniciarPartida = () => {
     setOpenJugar(false);
-    setFlippedIndices([]);
-    setMatchedIndices([]);
+    setIndicesImagenesVolteadas([]);
+    setIndicesImagenesCoincidentes([]);
   };
+
+  useEffect(() => {
+    if (parejasSeleccionadas()) {
+      const [firstIndex, secondIndex] = indicesImagenesVolteadas;
+      if (images[firstIndex] === images[secondIndex]) {
+        setIndicesImagenesCoincidentes((prev) => [...prev, firstIndex, secondIndex]);
+        setIndicesImagenesVolteadas([]);
+      }
+      else {
+        setTimeout(() => {
+          enderezarParejasSeleccionadas();
+          setIndicesImagenesVolteadas([]);
+        }, 1000);
+      }
+    }
+  }, [images, indicesImagenesVolteadas, indicesImagenesCoincidentes, parejasSeleccionadas]);
 
   return (
     <>
