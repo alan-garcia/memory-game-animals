@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import imagenes from './imagenes';
+import Dificultad from './dificultad';
 
 function App() {
   const [openJugar, setOpenJugar] = useState(false);
@@ -10,21 +11,21 @@ function App() {
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
 
-  const getDificultad = (event) => {
-    let filas = 0;
-    let celdas = 0;
-    const dificultad = event.target.dataset.dificultad;
+  const selectDificultad = (event) => {
+    let filas: number = 0;
+    let celdas: number = 0;
+    const dificultad: string = event.target.dataset.dificultad;
 
     switch (dificultad) {
-      case 'facil':
+      case Dificultad.FACIL:
         filas = 2;
         celdas = 3;
         break;
-      case 'medio':
+      case Dificultad.MEDIO:
         filas = 3;
         celdas = 4;
         break;
-      case 'dificil':
+      case Dificultad.DIFICIL:
         filas = 5;
         celdas = 6;
         break;
@@ -34,15 +35,15 @@ function App() {
 
     setNumFilas(filas);
     setNumCeldas(celdas);
-    const numPairs = (filas * celdas) / 2;
+    const numeroParejas: number = (filas * celdas) / 2;
 
-    setImages(generateImagePairs(numPairs));
+    setImages(generateImagePairs(numeroParejas));
     setOpenJugar(true);
   };
 
-  const generateImagePairs = (numPairs: number) => {
+  const generateImagePairs = (numeroParejas: number) => {
     const images: string[] = [];
-    for (let i = 0; i < numPairs; i++) {
+    for (let i: number = 0; i < numeroParejas; i++) {
       const img: string = imagenes[i % imagenes.length].src;
       images.push(img, img);
     }
@@ -51,7 +52,7 @@ function App() {
   };
 
   const voltear = (event) => {
-    const indice = (event.target.firstChild === null) ? event.target.parentElement.firstChild.dataset.indice : event.target.firstChild.dataset.indice;
+    const indice: number = (event.target.firstChild === null) ? event.target.parentElement.firstChild.dataset.indice : event.target.firstChild.dataset.indice;
     if (flippedIndices.length < 2 && !flippedIndices.includes(indice) && !matchedIndices.includes(indice)) {
       event.target.classList.add("flipped");
       setFlippedIndices((prev) => [...prev, indice]);
@@ -61,8 +62,6 @@ function App() {
       if (images[firstIndex] === images[secondIndex]) {
         setMatchedIndices((prev) => [...prev, firstIndex, secondIndex]);
         setFlippedIndices([]);
-        document.querySelectorAll(".celda")[firstIndex].classList.add("matched");
-        document.querySelectorAll(".celda")[secondIndex].classList.add("matched");
       }
       else {
         setTimeout(() => {
@@ -99,11 +98,11 @@ function App() {
 
   const generarCeldas = () => {
     const filas: JSX.Element[] = [];
-    let indice = 0;
+    let indice: number = 0;
 
-    for (let i = 0; i < numFilas; i++) {
+    for (let i: number = 0; i < numFilas; i++) {
       const celdas: JSX.Element[] = [];
-      for (let j = 0; j < numCeldas; j++) {
+      for (let j: number = 0; j < numCeldas; j++) {
         celdas.push(
           <div key={`celda-${i}-${j}`}
             className={`celda ${flippedIndices.includes(indice) || matchedIndices.includes(indice) ? 'flipped' : ''}`}
@@ -136,11 +135,11 @@ function App() {
           <h1>Juego de parejas de animales</h1>
           <p>Seleccione el nivel de dificultad:</p>
           <div className="parejas-dificultad">
-            <div className="parejas-dificultad-recuadro dificultad-facil" onClick={getDificultad} data-dificultad="facil">Fácil</div>
+            <div className="parejas-dificultad-recuadro dificultad-facil" onClick={selectDificultad} data-dificultad={Dificultad.FACIL}>Fácil</div>
 
-            <div className="parejas-dificultad-recuadro dificultad-medio" onClick={getDificultad} data-dificultad="medio">Medio</div>
+            <div className="parejas-dificultad-recuadro dificultad-medio" onClick={selectDificultad} data-dificultad={Dificultad.MEDIO}>Medio</div>
 
-            <div className="parejas-dificultad-recuadro dificultad-dificil" onClick={getDificultad} data-dificultad="dificil">Difícil</div>
+            <div className="parejas-dificultad-recuadro dificultad-dificil" onClick={selectDificultad} data-dificultad={Dificultad.DIFICIL}>Difícil</div>
           </div>
         </div>
       ) : (
