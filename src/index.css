@@ -112,3 +112,7 @@ body {
 .celda.flipped .back {
   transform: rotateY(0deg);
 }
+
+.movimientos {
+  font-size: 1.3rem;
+}

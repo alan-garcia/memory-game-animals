@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './App.css';
 import imagenes from './imagenes';
 import Dificultad from './dificultad';
@@ -7,6 +7,7 @@ function App() {
   const [openJugar, setOpenJugar] = useState(false);
   const [numFilas, setNumFilas] = useState(0);
   const [numCeldas, setNumCeldas] = useState(0);
+  const [movimientos, setMovimientos] = useState(0);
   const [images, setImages] = useState<string[]>([]);
   const [indicesImagenesVolteadas, setIndicesImagenesVolteadas] = useState<number[]>([]);
   const [indicesImagenesCoincidentes, setIndicesImagenesCoincidentes] = useState<number[]>([]);
@@ -58,6 +59,7 @@ function App() {
       setIndicesImagenesVolteadas((prev) => [...prev, indice]);
     }
     else if (parejasSeleccionadas()) {
+      setMovimientos(movimientos => movimientos + 1);
       const [firstIndex, secondIndex] = indicesImagenesVolteadas;
       if (images[firstIndex] === images[secondIndex]) {
         setIndicesImagenesCoincidentes((prev) => [...prev, firstIndex, secondIndex]);
@@ -98,7 +100,9 @@ function App() {
     return filas;
   };
 
-  const parejasSeleccionadas = () => indicesImagenesVolteadas.length === 2;
+  const parejasSeleccionadas = useCallback(() => {
+    return indicesImagenesVolteadas.length === 2;
+  }, [indicesImagenesVolteadas]);
 
   const existenParejasPorVoltear = () => indicesImagenesVolteadas.length < 2;
 
@@ -106,22 +110,24 @@ function App() {
 
   const parejasSeleccionadasCoinciden = (indice: number) => indicesImagenesCoincidentes.includes(indice);
 
-  const enderezarParejasSeleccionadas = () => {
+  const enderezarParejasSeleccionadas = useCallback(() => {
     indicesImagenesVolteadas.filter(indice => {
       if (indice !== indicesImagenesCoincidentes[indice]) {
         document.querySelectorAll(".celda")[indice].classList.remove("flipped");
       } 
     });
-  }
+  }, [indicesImagenesVolteadas, indicesImagenesCoincidentes]);
 
   const reiniciarPartida = () => {
     setOpenJugar(false);
+    setMovimientos(0);
     setIndicesImagenesVolteadas([]);
     setIndicesImagenesCoincidentes([]);
   };
 
   useEffect(() => {
     if (parejasSeleccionadas()) {
+      setMovimientos(movimientos => movimientos + 1);
       const [firstIndex, secondIndex] = indicesImagenesVolteadas;
       if (images[firstIndex] === images[secondIndex]) {
         setIndicesImagenesCoincidentes((prev) => [...prev, firstIndex, secondIndex]);
@@ -134,7 +140,7 @@ function App() {
         }, 1000);
       }
     }
-  }, [images, indicesImagenesVolteadas, indicesImagenesCoincidentes, parejasSeleccionadas]);
+  }, [images, indicesImagenesVolteadas, indicesImagenesCoincidentes, parejasSeleccionadas, enderezarParejasSeleccionadas])
 
   return (
     <>
@@ -153,6 +159,7 @@ function App() {
       ) : (
         <div className="parejas-inicio-container">
           <h1>Juego de parejas de animales</h1>
+          <p className="movimientos">{movimientos} movimientos</p>
           <div className="parejas-animales-container">{generarCeldas()}</div>
           <button className="parejas-volver-menu" onClick={reiniciarPartida}>
             Volver al menú
