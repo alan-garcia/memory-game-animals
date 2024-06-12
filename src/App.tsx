@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import './App.css';
 import imagenes from './imagenes';
 import Dificultad from './dificultad';
@@ -12,10 +12,11 @@ function App() {
   const [indicesImagenesVolteadas, setIndicesImagenesVolteadas] = useState<number[]>([]);
   const [indicesImagenesCoincidentes, setIndicesImagenesCoincidentes] = useState<number[]>([]);
 
-  const selectDificultad = (event) => {
+  const selectDificultad = (event: React.MouseEvent<HTMLDivElement>) => {
     let filas: number = 0;
     let celdas: number = 0;
-    const dificultad: string = event.target.dataset.dificultad;
+    const target = event.target as HTMLDivElement;
+    const dificultad: string | undefined = target.dataset.dificultad;
 
     switch (dificultad) {
       case Dificultad.FACIL:
@@ -52,10 +53,27 @@ function App() {
     return images.sort(() => Math.random() - 0.5);
   };
 
-  const voltear = (event) => {
-    const indice: number = (event.target.firstChild === null) ? event.target.parentElement.firstChild.dataset.indice : event.target.firstChild.dataset.indice;
+  const voltear = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement;
+    let indice: number = 0;
+
+    if (target.firstChild) {
+      const firstChild = target.firstChild as HTMLElement;
+      const indiceString = firstChild.dataset.indice;
+      if (indiceString !== undefined) {
+        indice = parseInt(indiceString, 10);
+      }
+    }
+    else if (target.parentElement && target.parentElement.firstChild) {
+      const parentFirstChild = target.parentElement.firstChild as HTMLElement;
+      const indiceString = parentFirstChild.dataset.indice;
+      if (indiceString !== undefined) {
+        indice = parseInt(indiceString, 10);
+      }
+    }
+    // const indice: number = (target.firstChild === null) ? target.parentElement.firstChild.dataset.indice : target.firstChild.dataset.indice;
     if (existenParejasPorVoltear() && !parejasPorVoltearCoinciden(indice) && !parejasSeleccionadasCoinciden(indice)) {
-      event.target.classList.add("flipped");
+      target.classList.add("flipped");
       setIndicesImagenesVolteadas((prev) => [...prev, indice]);
     }
     else if (parejasSeleccionadas()) {
