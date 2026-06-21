@@ -8,7 +8,6 @@ body {
   min-height: 100vh;
   width: 800px;
 }
-<<<<<<< HEAD
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -21,5 +20,3 @@ body {
   --boton-bgcolor: rgb(0, 132, 255);
   --celda-bgcolor: #ffe46d;
 }
-=======
->>>>>>> 6772d35216c45e0e4f2b639bc5880ad661def79b

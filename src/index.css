@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-=======
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  --dificultad-facil-bgcolor: rgb(16, 219, 16);
-  --dificultad-medio-bgcolor: rgb(255, 164, 27);
-  --dificultad-dificil-bgcolor: rgb(255, 46, 46);
-  --boton-bgcolor: rgb(0, 132, 255);
-  --celda-bgcolor: #ffe46d;
-}
-
->>>>>>> 6772d35216c45e0e4f2b639bc5880ad661def79b
 body {
   display: flex;
   justify-content: center;
@@ -73,10 +58,6 @@ body {
 }
 
 .parejas-animales-container {
-<<<<<<< HEAD
-=======
-  
->>>>>>> 6772d35216c45e0e4f2b639bc5880ad661def79b
   .parejas-animales-fila {
     display: flex;
     justify-content: center;
@@ -94,7 +75,6 @@ body {
         background-color: var(--celda-bgcolor);
       }
     }
-<<<<<<< HEAD
 
     .celda.match::after {
       content: "";
@@ -111,28 +91,18 @@ body {
 @keyframes drawBorder {
   to {
     transform: scaleX(1);
-=======
->>>>>>> 6772d35216c45e0e4f2b639bc5880ad661def79b
   }
 }
 
 .parejas-volver-menu {
   cursor: pointer;
-<<<<<<< HEAD
   padding: 1rem;
-=======
-  padding: .6rem 1rem;
->>>>>>> 6772d35216c45e0e4f2b639bc5880ad661def79b
   border-radius: 6px;
   background-color: var(--boton-bgcolor);
   border: 1px solid var(--boton-bgcolor);
   color: #fff;
-<<<<<<< HEAD
   font-size: 1rem;
   margin: 2rem 0;
-=======
-  margin-top: 1rem;
->>>>>>> 6772d35216c45e0e4f2b639bc5880ad661def79b
 }
 
 .back {
@@ -156,12 +126,9 @@ body {
 .movimientos {
   font-size: 1.3rem;
 }
-<<<<<<< HEAD
 
 .partida-finalizada {
   margin-top: 2rem;
   font-size: 1.5rem;
   font-weight: 700;
 }
-=======
->>>>>>> 6772d35216c45e0e4f2b639bc5880ad661def79b
