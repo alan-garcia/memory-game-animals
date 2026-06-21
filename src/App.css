@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 800px;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --dificultad-facil-bgcolor: rgb(16, 219, 16);
+  --dificultad-medio-bgcolor: rgb(255, 164, 27);
+  --dificultad-dificil-bgcolor: rgb(255, 46, 46);
+  --boton-bgcolor: rgb(0, 132, 255);
+  --celda-bgcolor: #ffe46d;
+}

@@ -1,0 +1,134 @@
+body {
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  margin: auto;
+}
+
+.parejas-inicio-container {
+  text-align: center;
+}
+
+.parejas-dificultad {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-flow: column wrap;
+}
+
+.parejas-dificultad-recuadro {
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px;
+  padding: .5rem 0;
+  margin-bottom: 1rem;
+  width: 80%;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+}
+
+.dificultad-facil {
+  border: 1px solid var(--dificultad-facil-bgcolor);
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    background-color: var(--dificultad-facil-bgcolor);
+    color: #fff;
+  }
+}
+
+.dificultad-medio {
+  border: 1px solid var(--dificultad-medio-bgcolor);
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    background-color: var(--dificultad-medio-bgcolor);
+    color: #fff;
+  }
+}
+
+.dificultad-dificil {
+  border: 1px solid var(--dificultad-dificil-bgcolor);
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    background-color: var(--dificultad-dificil-bgcolor);
+    color: #fff;
+  }
+}
+
+.parejas-animales-container {
+  .parejas-animales-fila {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    
+    .celda {
+      cursor: pointer;
+      border: 2px solid #444;
+      width: 120px;
+      height: 120px;
+      position: relative;
+      margin: .2rem;
+
+      &:hover {
+        background-color: var(--celda-bgcolor);
+      }
+    }
+
+    .celda.match::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid #00c853;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: drawBorder 0.4s ease-out forwards;
+    }
+  }
+}
+
+@keyframes drawBorder {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.parejas-volver-menu {
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: var(--boton-bgcolor);
+  border: 1px solid var(--boton-bgcolor);
+  color: #fff;
+  font-size: 1rem;
+  margin: 2rem 0;
+}
+
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+  background-size: cover;
+  transform: rotateY(180deg);
+}
+
+.celda.flipped .front {
+  transform: rotateY(180deg);
+}
+
+.celda.flipped .back {
+  transform: rotateY(0deg);
+}
+
+.movimientos {
+  font-size: 1.3rem;
+}
+
+.partida-finalizada {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
