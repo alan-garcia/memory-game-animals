@@ -1,14 +1,22 @@
 # Memory game animals
 
-El juego de las parejas, versión con fotos de animales, la cual permite seleccionar la dificultad del juego: **Fácil**, **Medio**, y **Difícil**.
+El juego de unir parejas con fotos de animales, la cual permite seleccionar la dificultad del juego: **Fácil**, **Medio**, y **Difícil**.
 
 Link: https://memory-game-animals.netlify.app/
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/19a3b855-355d-41e0-9b44-223509a38492/deploy-status)](https://app.netlify.com/projects/memory-game-animals/deploys)
+
 ## Capturas
 
-![menú principal](https://github.com/alan-garcia/memory-game-animals/blob/main/images/screenshots/nivel-dificultad.png?raw=true)
-![dificultad fácil](https://github.com/alan-garcia/memory-game-animals/blob/main/images/screenshots/dificultad-facil.png?raw=true)
-![dificultad fácil final de la partida](https://github.com/alan-garcia/memory-game-animals/blob/main/images/screenshots/dificultad-facil-fin-partida.png?raw=true)
+<p>
+  <img width="480" height="308" alt="image" src="https://github.com/user-attachments/assets/edb89ac7-a023-4a87-ba9f-c70a879f449d" />
+</p>
+<p>
+  <img width="471" height="473" alt="image" src="https://github.com/user-attachments/assets/f28ba8ee-9cae-496b-ae9a-e4df8c00d4ae" />
+</p>
+<p>
+  <img width="478" height="547" alt="image" src="https://github.com/user-attachments/assets/2ff2e0c4-2bb2-450e-80b4-52ca829cf418" />
+</p>
 
 ## Atribución
 
